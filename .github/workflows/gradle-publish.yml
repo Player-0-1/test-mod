@@ -17,10 +17,5 @@ jobs:
         distribution: 'temurin'
     - name: Build Mod Jar
       run: ./gradlew jar
-    - name: Send Jar To Releases
-      uses: xresloader/upload-to-github-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        file: "build/libs/${{ github.event.repository.name }}.jar"
-        overwrite: true
+    - name: Display Files
+      run: ls /build/libs/
