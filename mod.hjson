@@ -11,7 +11,7 @@ author: "DevDev"
 main: "com.devdev.testmod.Main"
 
 #the mod description as seen in the mod dialog
-description: "DevDev's Testing Mod"
+description: "DevDev's mod for learning"
 
 #the mod version
 version: 1.0
