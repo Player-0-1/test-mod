@@ -18,4 +18,4 @@ jobs:
     - name: Build Mod Jar
       run: ./gradlew jar
     - name: Display Files
-      run: ls /build/libs/
+      run: ls build/libs/
