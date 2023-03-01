@@ -22,7 +22,7 @@ public class Main extends Mod
             Gson gson = new Gson();
             String tileName =  (e.tile.block().name + e.tile.floor().name + e.tile.overlay().name).replace("air", "");
             Data data = new Data(e.player.name, tileName);
-            Log.infoTag("[gold]Test Mod", gson.toJson(data));
+            Log.infoTag("Test Mod", gson.toJson(data));
         });
     }
 
