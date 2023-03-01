@@ -25,3 +25,4 @@ jobs:
       with:
         file: "build/libs/${{ github.event.repository.name }}-desktop.jar"
         overwrite: true
+        tag_name: "${{ github.event.repository.name }}"
