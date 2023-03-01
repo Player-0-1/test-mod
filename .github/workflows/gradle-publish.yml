@@ -31,3 +31,4 @@ jobs:
         file: "build/libs/${{ github.event.repository.name }}-desktop-${{env.version_name}}.jar"
         overwrite: true
         tag_name: "${{ github.event.repository.name }}-${{env.version_name}}"
+        draft: false
