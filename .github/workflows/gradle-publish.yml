@@ -5,8 +5,7 @@ on: [push]
 jobs:
   buildJar:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
+    permissions: write-all
 
     steps:
     - uses: actions/checkout@v3
