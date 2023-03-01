@@ -18,11 +18,18 @@ jobs:
       run: ./gradlew jar
     - name: Display Files
       run: ls build/libs/
+    - name: Retrieve Version
+      run: | 
+      echo "::set-output name=VERSION_NAME::$(./gradlew -q printVersion)"
+      id: mod_version
+    - name: Get version
+      run: |
+        echo "version_name=${{steps.mod_version.outputs.VERSION_NAME}}" >> $GITHUB_ENV
     - name: Send Jar To Releases
       uses: xresloader/upload-to-github-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        file: "build/libs/${{ github.event.repository.name }}-desktop.jar"
+        file: "build/libs/${{ github.event.repository.name }}-desktop-${{env.version_name}}.jar"
         overwrite: true
-        tag_name: "${{ github.event.repository.name }}"
+        tag_name: "${{ github.event.repository.name }}-${{env.version_name}}"

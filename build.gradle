@@ -1,3 +1,6 @@
+import static sun.security.util.Debug.println
+import groovy.json.JsonSlurper
+
 apply plugin: "java"
 
 version '1.0'
@@ -12,11 +15,13 @@ repositories{
     maven{ url 'https://www.jitpack.io' }
 }
 
-ext{
+ext {
     //the build number that this mod is made for
     mindustryVersion = 'v142'
     jabelVersion = "93fde537c7"
     sdkRoot = System.getenv("ANDROID_HOME") ?: System.getenv("ANDROID_SDK_ROOT")
+    jsonFile = file('mod.json')
+    modVersion = new JsonSlurper().parseText(jsonFile.text).version
 }
 
 //java 8 backwards compatibility flag
@@ -33,6 +38,7 @@ dependencies{
     annotationProcessor "com.github.Anuken:jabel:$jabelVersion"
 
     implementation 'com.google.code.gson:gson:2.10.1'
+    implementation 'org.codehaus.groovy:groovy-json:3.0.9'
 }
 
 //force arc version
@@ -64,14 +70,15 @@ task jarAndroid{
 }
 
 jar{
-    archiveFileName = "${project.archivesBaseName}-desktop.jar"
-
+    duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+    archiveFileName = "${project.archivesBaseName}-desktop-${modVersion}.jar"
+    println modVersion
     from{
         configurations.runtimeClasspath.collect{ it.isDirectory() ? it : zipTree(it) }
     }
 
     from(rootDir){
-        include "mod.hjson"
+        include "mod.json"
     }
 
     from("assets/"){
@@ -92,4 +99,8 @@ task deploy(type: Jar){
             delete "$buildDir/libs/${project.archivesBaseName}Android.jar"
         }
     }
+}
+
+task printVersion {
+    println modVersion
 }

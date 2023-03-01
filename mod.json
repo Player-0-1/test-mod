@@ -1,0 +1,10 @@
+{
+    "displayName": "Test Mod",
+    "name": "test-mod",
+    "author": "DevDev",
+    "main": "com.devdev.testmod.Main",
+    "description": "DevDev's mod for learning",
+    "version": 1.0,
+    "minGameVersion": 140,
+    "java": true
+}
