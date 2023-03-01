@@ -20,9 +20,9 @@ jobs:
     - name: Display Files
       run: ls build/libs/
     - name: Send Jar To Releases
-        uses: xresloader/upload-to-github-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          file: "build/libs/${{ github.event.repository.name }}-desktop.jar"
-          overwrite: true
+      uses: xresloader/upload-to-github-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        file: "build/libs/${{ github.event.repository.name }}-desktop.jar"
+        overwrite: true
