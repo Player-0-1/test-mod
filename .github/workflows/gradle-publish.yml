@@ -19,12 +19,10 @@ jobs:
     - name: Display Files
       run: ls build/libs/
     - name: Retrieve Version
-      run: | 
-      echo "::set-output name=VERSION_NAME::$(./gradlew -q printVersion)"
+      run: echo "::set-output name=VERSION_NAME::$(./gradlew -q printVersion)"
       id: mod_version
     - name: Get version
-      run: |
-        echo "version_name=${{steps.mod_version.outputs.VERSION_NAME}}" >> $GITHUB_ENV
+      run: echo "version_name=${{steps.mod_version.outputs.VERSION_NAME}}" >> $GITHUB_ENV
     - name: Send Jar To Releases
       uses: xresloader/upload-to-github-release@v1
       env:
