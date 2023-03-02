@@ -10,6 +10,7 @@ import mindustry.game.EventType.*;
 import mindustry.gen.*;
 import mindustry.mod.*;
 import mindustry.ui.dialogs.*;
+import mindustry.world.blocks.environment.OreBlock;
 
 public class Main extends Mod
 {
@@ -22,14 +23,16 @@ public class Main extends Mod
             Gson gson = new Gson();
             String tileName =  (e.tile.block().name + e.tile.floor().name + e.tile.overlay().name).replace("air", "");
             Data data = new Data(e.player.name, tileName);
-            Log.infoTag("Test Mod", gson.toJson(data));
+            //Log.infoTag("Test Mod", gson.toJson(data));
+            Vars.ui.hudfrag.showToast(gson.toJson(data));
         });
     }
 
     @Override
     public void loadContent()
     {
-        Log.info("Loading some example content.");
+       Items.load();
+       Blocks.load();
     }
 
 
