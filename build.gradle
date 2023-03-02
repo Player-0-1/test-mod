@@ -21,7 +21,7 @@ ext {
     jabelVersion = "93fde537c7"
     sdkRoot = System.getenv("ANDROID_HOME") ?: System.getenv("ANDROID_SDK_ROOT")
     jsonFile = file('mod.json')
-    modVersion = new JsonSlurper().parseText(jsonFile.text).version
+    modVersion = "${new JsonSlurper().parseText(jsonFile.text).version}"
 }
 
 //java 8 backwards compatibility flag
