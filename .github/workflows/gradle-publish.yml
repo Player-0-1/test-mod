@@ -33,13 +33,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          file: "build/libs/${{ github.event.repository.name }}-desktop-${{env.version_name}}.jar"
+          file: "build/libs/${{ github.event.repository.name }}-desktop-${{ env.version_name }}.jar"
           overwrite: true
-          tag_name: "${{ github.event.repository.name }}-${{env.version_name}}"
+          tag_name: "${{ github.event.repository.name }}-${{ env.version_name }}"
           draft: false
 
       - name: Deploy Stage
         uses: fjogeleit/http-request-action@v1
         with:
-          url: 'http://dev-code.duckdns.org:3000/data?version=${{env.version_name}}'
+          url: 'http://dev-code.duckdns.org:8080/data?version=${{ env.version_name }}'
           method: 'GET'
