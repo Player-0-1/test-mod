@@ -22,14 +22,14 @@ jobs:
       run: ls build/libs/
 
     - name: Retrieve Version
-      run: echo "VERSION=$(./gradlew -q printVersion)" >> $GITHUB_ENV
+      run: echo "VERSION_INFO=$(./gradlew -q printVersion)" >> $GITHUB_ENV
 
     - name: Send Jar To Releases
       uses: xresloader/upload-to-github-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        file: "build/libs/${{ github.event.repository.name }}-desktop-${{env.VERSION}}.jar"
+        file: "build/libs/${{ github.event.repository.name }}-desktop-${{env.VERSION_INFO}}.jar"
         overwrite: true
-        tag_name: "${{ github.event.repository.name }}-${{env.VERSION}}"
+        tag_name: "${{ github.event.repository.name }}-${{env.VERSION_INFO}}"
         draft: false
