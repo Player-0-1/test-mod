@@ -14,21 +14,22 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
+
     - name: Build Mod Jar
       run: ./gradlew jar
+
     - name: Display Files
       run: ls build/libs/
+
     - name: Retrieve Version
-      run: echo "::set-output name=VERSION_NAME::$(./gradlew -q printVersion)"
-      id: mod_version
-    - name: Get version
-      run: echo "version_name=${{steps.mod_version.outputs.VERSION_NAME}}" >> $GITHUB_ENV
+      run: echo "VERSION=$(./gradlew -q printVersion)" >> $GITHUB_ENV
+
     - name: Send Jar To Releases
       uses: xresloader/upload-to-github-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        file: "build/libs/${{ github.event.repository.name }}-desktop-${{env.version_name}}.jar"
+        file: "build/libs/${{ github.event.repository.name }}-desktop-${{env.VERSION}}.jar"
         overwrite: true
-        tag_name: "${{ github.event.repository.name }}-${{env.version_name}}"
+        tag_name: "${{ github.event.repository.name }}-${{env.VERSION}}"
         draft: false
